@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>skkuola - Feed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white">
+    <!-- NAVBAR PRINCIPALE -->
+    <header class="border-b border-gray-200 bg-white sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <!-- Left: Logo + Dropdown -->
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xl sm:text-2xl font-bold">skkuola</span>
+            <span class="text-xs bg-gray-200 px-2 py-0.5 rounded font-semibold">BETA</span>
+            <button class="ml-1">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+              </svg>
+            </button>
+          </div>
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex items-center gap-6 ml-4">
+            <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900">Courses</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900">Events</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900">Members</a>
+          </nav>
+        </div>
+        <!-- Right: Icons + User -->
+        <div class="flex items-center gap-2 sm:gap-4">
+          <button class="hidden sm:flex items-center gap-2 text-gray-600 hover:text-gray-900">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="7" stroke-width="2"/>
+              <path d="M20 20l-3.5-3.5" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="hidden lg:inline">Search</span>
+          </button>
+          <button class="p-2 hover:bg-gray-100 rounded-lg">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 00-12 0v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+            </svg>
+          </button>
+          <button class="p-2 hover:bg-gray-100 rounded-lg hidden sm:block">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
+          </button>
+          <button class="p-2 hover:bg-gray-100 rounded-lg hidden sm:block">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+            </svg>
+          </button>
+          <!-- User Dropdown -->
+          <div class="relative">
+            <button id="userMenuBtn" class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/80?img=5" class="h-8 w-8 sm:h-9 sm:w-9 rounded-full" alt="User">
+            </button>
+            <!-- Dropdown Menu -->
+            <div id="userDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Profile</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Settings</a>
+              <hr class="my-2">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- MAIN LAYOUT -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+      <div class="grid lg:grid-cols-[280px_1fr_340px] gap-6">
+        <!-- LEFT SIDEBAR -->
+        <aside id="leftSidebar" class="hidden lg:block">
+          <div class="space-y-6">
+            <!-- Feed Button -->
+            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-600 text-white font-medium">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+              </svg>
+              Feed
+            </button>
+            <!-- Hub Section -->
+            <div>
+              <button onclick="toggleSection('hub')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+                <span>Hub</span>
+                <svg id="hubIcon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                </svg>
+              </button>
+              <div id="hubSection" class="space-y-1 mt-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                  <span>👋</span>
+                  <span>Presentati!</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                  <span>🏃</span>
+                  <span>Workflows</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                  <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+                  <span>#chat-generale</span>
+                </a>
+              </div>
+            </div>
+            <!-- Klasse 1 -->
+            <div>
+              <button onclick="toggleSection('klasse1')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+                <span>Klasse 1</span>
+                <svg id="klasse1Icon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                </svg>
+              </button>
+              <div id="klasse1Section" class="space-y-1 mt-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                  <span>🏛️</span>
+                  <span>Fondamenta di AI</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                  <span>🎓</span>
+                  <span>Large Language Models</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                  <span>🌱</span>
+                  <span>Ingegneria dei prompt</span>
+                </a>
+              </div>
+            </div>
+            <!-- Klasse 2 -->
+            <div>
+              <button onclick="toggleSection('klasse2')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+                <span>Klasse 2</span>
+                <svg id="klasse2Icon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                </svg>
+              </button>
+              <div id="klasse2Section" class="hidden space-y-1 mt-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                  <span>📚</span>
+                  <span>Corso placeholder</span>
+                </a>
+              </div>
+            </div>
+            <!-- Klasse 3 -->
+            <div>
+              <button onclick="toggleSection('klasse3')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+                <span>Klasse 3</span>
+                <svg id="klasse3Icon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                </svg>
+              </button>
+              <div id="klasse3Section" class="hidden space-y-1 mt-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                  <span>📚</span>
+                  <span>Corso placeholder</span>
+                </a>
+              </div>
+            </div>
+            <!-- Links -->
+            <div>
+              <button onclick="toggleSection('links')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+                <span>Links</span>
+                <svg id="linksIcon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                </svg>
+              </button>
+              <div id="linksSection" class="space-y-1 mt-2">
+                <a href="#" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg text-sm">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                  Richiedi un corso
+                </a>
+                <a href="#" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg text-sm">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                  Lascia un feedback
+                </a>
+              </div>
+            </div>
+            <p class="px-4 text-xs text-gray-400">Powered by Circle</p>
+          </div>
+        </aside>
+        <!-- MAIN CONTENT -->
+        <main>
+          <!-- SUB HEADER with mobile menu -->
+          <div class="flex items-center justify-between mb-6 gap-4">
+            <div class="flex items-center gap-3">
+              <!-- Mobile Menu Button -->
+              <button id="mobileMenuBtn" class="lg:hidden p-2 hover:bg-gray-100 rounded-lg">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+              </button>
+              <h1 class="text-xl sm:text-2xl font-bold">Feed</h1>
+            </div>
+            <div class="flex items-center gap-2 sm:gap-3">
+              <select class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                <option>Latest</option>
+                <option>Popular</option>
+                <option>Trending</option>
+              </select>
+              <button class="px-4 sm:px-6 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 text-sm sm:text-base whitespace-nowrap">
+                New post
+              </button>
+            </div>
+          </div>
+          <!-- Start a post -->
+          <div class="bg-gray-50 rounded-2xl p-4 sm:p-6 mb-6">
+            <div class="flex items-center gap-3">
+              <img src="https://i.pravatar.cc/80?img=5" class="h-10 w-10 rounded-full flex-shrink-0" alt="User">
+              <input type="text" placeholder="Start a post" class="flex-1 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm sm:text-base">
+              <button class="p-2 hover:bg-gray-200 rounded-lg flex-shrink-0">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <!-- Post Card -->
+          <article class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 mb-6">
+            <div class="flex items-start gap-3 sm:gap-4">
+              <img src="https://i.pravatar.cc/80?img=12" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full flex-shrink-0" alt="Carmen">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-start justify-between gap-2">
+                  <div class="min-w-0">
+                    <h3 class="font-semibold text-sm sm:text-base">Carmen Nuzzo</h3>
+                    <p class="text-xs sm:text-sm text-gray-500">19h • Posted in Presentati!</p>
+                  </div>
+                  <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                    <button class="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg">
+                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+                      </svg>
+                    </button>
+                    <button class="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg">
+                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <h2 class="text-lg sm:text-xl font-bold mt-3 sm:mt-4 mb-2 sm:mb-3">C'amma Fa con l'IA? – Innovare l'Ospitalità, Eventi e Creazione di Contenuti con Passione</h2>
+                <div class="text-sm sm:text-base text-gray-700 space-y-2 sm:space-y-3">
+                  <p>👋 <strong>Ciao a tutti, sono Carmen Nuzzo!</strong></p>
+                  <p>Ho 24 anni e una grande passione per <strong>arte, fotografia, marketing e innovazione</strong> — passioni che mi hanno portata a costruire un percorso dinamico nel mondo del <strong>turismo e della comunicazione</strong>.</p>
+                  <p>🏨 Attualmente lavoro come</p>
+                  <button class="text-gray-500 text-sm hover:text-gray-700">See more</button>
+                </div>
+                <div class="flex items-center justify-between mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-100">
+                  <div class="flex items-center gap-3 sm:gap-4">
+                    <button class="flex items-center gap-1.5 sm:gap-2 text-gray-600 hover:text-red-500">
+                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                      </svg>
+                    </button>
+                    <button class="flex items-center gap-1.5 sm:gap-2 text-gray-600 hover:text-blue-500">
+                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
+                    <img src="https://i.pravatar.cc/40?img=8" class="h-5 w-5 sm:h-6 sm:w-6 rounded-full" alt="">
+                    <span>1 like • 0 comments</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- Post 2 -->
+          <article class="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6">
+            <div class="flex items-start gap-3 sm:gap-4">
+              <img src="https://i.pravatar.cc/80?img=15" class="h-10 w-10 sm:h-12 sm:w-12 rounded-full flex-shrink-0" alt="Luigi">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <h3 class="font-semibold text-sm sm:text-base">luigi freza</h3>
+                    <p class="text-xs sm:text-sm text-gray-500">2d • Posted in Presentati!</p>
+                  </div>
+                  <div class="flex items-center gap-1 sm:gap-2">
+                    <button class="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg">
+                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+                      </svg>
+                    </button>
+                    <button class="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg">
+                      <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </main>
+        <!-- RIGHT SIDEBAR -->
+        <aside class="hidden xl:block">
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 sticky top-24">
+            <h3 class="font-bold text-lg mb-6">Trending posts</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="h-12 w-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+                  CM
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-semibold text-sm truncate">Mi presento</h4>
+                  <p class="text-xs text-gray-500 truncate">Colombo massimo</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?img=33" class="h-12 w-12 rounded-full flex-shrink-0" alt="">
+                <div class="min-w-0">
+                  <h4 class="font-semibold text-sm truncate">Agente RAG</h4>
+                  <p class="text-xs text-gray-500 truncate">Seby Giliberto</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="h-12 w-12 rounded-full bg-green-700 flex items-center justify-center text-white font-bold flex-shrink-0">
+                  LF
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-semibold text-sm truncate">Hello</h4>
+                  <p class="text-xs text-gray-500 truncate">luigi freza</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?img=12" class="h-12 w-12 rounded-full flex-shrink-0" alt="">
+                <div class="min-w-0">
+                  <h4 class="font-semibold text-sm leading-tight line-clamp-2">C'amma Fa con l'IA? – Innovare l'Ospitalità</h4>
+                  <p class="text-xs text-gray-500 truncate">Carmen Nuzzo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <!-- MOBILE SIDEBAR OVERLAY -->
+    <div id="mobileSidebarOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"></div>
+    <!-- MOBILE SIDEBAR -->
+    <div id="mobileSidebar" class="fixed inset-y-0 left-0 w-full max-w-sm bg-white z-50 transform -translate-x-full transition-transform duration-300 lg:hidden overflow-y-auto">
+      <div class="p-6 space-y-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-bold">Menu</h2>
+          <button id="closeMobileSidebar" class="p-2 hover:bg-gray-100 rounded-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <!-- Feed Button -->
+        <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-indigo-600 text-white font-medium">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+          </svg>
+          Feed
+        </button>
+        <!-- Hub Section -->
+        <div>
+          <button onclick="toggleSection('hubMobile')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+            <span>Hub</span>
+            <svg id="hubMobileIcon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+            </svg>
+          </button>
+          <div id="hubMobileSection" class="space-y-1 mt-2">
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+              <span>👋</span>
+              <span>Presentati!</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+              <span>🏃</span>
+              <span>Workflows</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+              <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+              <span>#chat-generale</span>
+            </a>
+          </div>
+        </div>
+        <!-- Klasse 1 -->
+        <div>
+          <button onclick="toggleSection('klasse1Mobile')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+            <span>Klasse 1</span>
+            <svg id="klasse1MobileIcon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+            </svg>
+          </button>
+          <div id="klasse1MobileSection" class="space-y-1 mt-2">
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+              <span>🏛️</span>
+              <span>Fondamenta di AI</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+              <span>🎓</span>
+              <span>Large Language Models</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+              <span>🌱</span>
+              <span>Ingegneria dei prompt</span>
+            </a>
+          </div>
+        </div>
+        <!-- Klasse 2 -->
+        <div>
+          <button onclick="toggleSection('klasse2Mobile')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+            <span>Klasse 2</span>
+            <svg id="klasse2MobileIcon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+            </svg>
+          </button>
+          <div id="klasse2MobileSection" class="hidden space-y-1 mt-2">
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+              <span>📚</span>
+              <span>Corso placeholder</span>
+            </a>
+          </div>
+        </div>
+        <!-- Klasse 3 -->
+        <div>
+          <button onclick="toggleSection('klasse3Mobile')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+            <span>Klasse 3</span>
+            <svg id="klasse3MobileIcon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+            </svg>
+          </button>
+          <div id="klasse3MobileSection" class="hidden space-y-1 mt-2">
+            <a href="#" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+              <span>📚</span>
+              <span>Corso placeholder</span>
+            </a>
+          </div>
+        </div>
+        <!-- Links -->
+        <div>
+          <button onclick="toggleSection('linksMobile')" class="w-full flex items-center justify-between px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">
+            <span>Links</span>
+            <svg id="linksMobileIcon" class="w-4 h-4 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+            </svg>
+          </button>
+          <div id="linksMobileSection" class="space-y-1 mt-2">
+            <a href="#" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+              Richiedi un corso
+            </a>
+            <a href="#" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+              Lascia un feedback
+            </a>
+          </div>
+        </div>
+        <p class="px-4 text-xs text-gray-400">Powered by Circle</p>
+      </div>
+    </div>
+    <script>
+      // User Dropdown Menu
+      const userMenuBtn = document.getElementById('userMenuBtn');
+      const userDropdown = document.getElementById('userDropdown');
+
+      userMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userDropdown.classList.toggle('hidden');
+      });
+
+      document.addEventListener('click', () => {
+        userDropdown.classList.add('hidden');
+      });
+
+      // Mobile Sidebar
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileSidebar = document.getElementById('mobileSidebar');
+      const mobileSidebarOverlay = document.getElementById('mobileSidebarOverlay');
+      const closeMobileSidebar = document.getElementById('closeMobileSidebar');
+
+      function openMobileSidebar() {
+        mobileSidebar.classList.remove('-translate-x-full');
+        mobileSidebarOverlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileSidebarFn() {
+        mobileSidebar.classList.add('-translate-x-full');
+        mobileSidebarOverlay.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      mobileMenuBtn.addEventListener('click', openMobileSidebar);
+      closeMobileSidebar.addEventListener('click', closeMobileSidebarFn);
+      mobileSidebarOverlay.addEventListener('click', closeMobileSidebarFn);
+
+      // Toggle Sections (Desktop)
+      function toggleSection(sectionId) {
+        const section = document.getElementById(sectionId + 'Section');
+        const icon = document.getElementById(sectionId + 'Icon');
+
+        if (section.classList.contains('hidden')) {
+          section.classList.remove('hidden');
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          section.classList.add('hidden');
+          icon.style.transform = 'rotate(0deg)';
+        }
+      }
+    </script>
+  </body>
+</html>
