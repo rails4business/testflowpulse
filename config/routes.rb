@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resource :session
+  resources :passwords, param: :token
+# config/routes.rb
+constraints AuthenticatedConstraint.new do
+  root "dashboard#home", as: :authenticated_root
+end
+root "pages#home", as: :unauthenticated_root
+
+  get "dashboard/home"
+  get "dashboard/superadmin"
   get "pages/home"
   get "pages/about"
   get "pages/contact"
@@ -13,5 +23,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "pages#home"
+  #  root "pages#home"
 end
