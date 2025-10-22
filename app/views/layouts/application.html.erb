@@ -15,10 +15,35 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "actiontext",  "data-turbo-track": "reload" %> 
+    <%= stylesheet_link_tag "lexxy" %>
     <%= javascript_importmap_tags %>
     <!-- 1) Tailwind in modalità class (non segue il sistema) -->
   </head>
   <body>
-    <%= yield %>
+	  <div class="antialiased  dark:bg-gray-900">
+	  
+	    <%= render "shared/nav_application"%>
+	   
+	    <%= render "shared/aside"%>
+		
+		
+	
+	      
+
+	     <main class="md:ml-64 h-auto pt-20">
+           <%= render "shared/messages" %>
+			<%= yield :subnav_application %>
+			<div class="px-4">
+					
+				
+	          <%= yield %>
+			  </div>
+	     </main>
+	    
+	  </div>
+
+   	
+
   </body>
 </html>
