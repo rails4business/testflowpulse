@@ -2,3 +2,8 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import 'flowbite'
+import "lexxy"
+import "@rails/activestorage"
+import "@rails/actiontext"
+// import "@rails/lexical"
+

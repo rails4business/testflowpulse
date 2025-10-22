@@ -1,15 +1,26 @@
 Rails.application.routes.draw do
+   resources :posts do
+    collection do
+      post :import              # /posts/import  -> carica CSV
+      get  :export              # /posts/export  -> tutti (CSV/JSON)
+    end
+    member do
+      get :export               # /posts/:id/export -> uno (CSV/JSON)
+    end
+  end
   resource :session
   resources :passwords, param: :token
 # config/routes.rb
 constraints AuthenticatedConstraint.new do
   root "dashboard#home", as: :authenticated_root
 end
-root "pages#home", as: :unauthenticated_root
+  root "pages#home", as: :unauthenticated_root
 
   get "dashboard/home"
   get "dashboard/superadmin"
   get "pages/home"
+  get "posturacorretta", to: "pages#posturacorretta"
+  get "pages/flowpulse", to: "pages#flowpulse"
   get "pages/about"
   get "pages/contact"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -23,5 +34,5 @@ root "pages#home", as: :unauthenticated_root
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  #  root "pages#home"
+  root "posts#index"
 end

@@ -1,0 +1,299 @@
+/* ============================================
+   BLOG CONTENT FORMATTING
+   ============================================ */
+
+.prose-blog {
+  color: rgb(30, 41, 59);
+}
+
+.dark .prose-blog {
+  color: rgb(226, 232, 240);
+}
+
+.prose-blog h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 900;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: rgb(15, 23, 42);
+}
+
+.dark .prose-blog h1 {
+  color: rgb(248, 250, 252);
+}
+
+.prose-blog h1:first-child {
+  margin-top: 0;
+}
+
+.prose-blog h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: rgb(15, 23, 42);
+}
+
+.dark .prose-blog h2 {
+  color: rgb(248, 250, 252);
+}
+
+.prose-blog h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: rgb(15, 23, 42);
+}
+
+.dark .prose-blog h3 {
+  color: rgb(248, 250, 252);
+}
+
+.prose-blog h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: rgb(30, 41, 59);
+}
+
+.dark .prose-blog h4 {
+  color: rgb(241, 245, 249);
+}
+
+.prose-blog p {
+  font-size: 1.125rem;
+  line-height: 2rem;
+  margin-bottom: 1.5rem;
+  color: rgb(51, 65, 85);
+}
+
+.dark .prose-blog p {
+  color: rgb(203, 213, 225);
+}
+
+.prose-blog a {
+  color: rgb(37, 99, 235);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: all 150ms ease-in-out;
+}
+
+.prose-blog a:hover {
+  color: rgb(29, 78, 216);
+}
+
+.dark .prose-blog a {
+  color: rgb(96, 165, 250);
+}
+
+.dark .prose-blog a:hover {
+  color: rgb(147, 197, 253);
+}
+
+.prose-blog strong {
+  font-weight: 700;
+  color: rgb(15, 23, 42);
+}
+
+.dark .prose-blog strong {
+  color: rgb(248, 250, 252);
+}
+
+.prose-blog em {
+  font-style: italic;
+  color: rgb(51, 65, 85);
+}
+
+.dark .prose-blog em {
+  color: rgb(203, 213, 225);
+}
+
+.prose-blog ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+}
+
+.prose-blog ul li {
+  margin-bottom: 0.5rem;
+  color: rgb(51, 65, 85);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin-left: 1rem;
+}
+
+.dark .prose-blog ul li {
+  color: rgb(203, 213, 225);
+}
+
+.prose-blog ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+}
+
+.prose-blog ol li {
+  margin-bottom: 0.5rem;
+  color: rgb(51, 65, 85);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin-left: 1rem;
+}
+
+.dark .prose-blog ol li {
+  color: rgb(203, 213, 225);
+}
+
+.prose-blog blockquote {
+  border-left-width: 4px;
+  border-left-color: rgb(59, 130, 246);
+  padding-left: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  font-size: 1.125rem;
+  color: rgb(51, 65, 85);
+  background-color: rgb(248, 250, 252);
+}
+
+.dark .prose-blog blockquote {
+  color: rgb(203, 213, 225);
+  background-color: rgb(15, 23, 42);
+}
+
+.prose-blog code {
+  background-color: rgb(241, 245, 249);
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.875rem;
+  color: rgb(220, 38, 38);
+  font-style: normal;
+}
+
+.dark .prose-blog code {
+  background-color: rgb(30, 41, 59);
+  color: rgb(248, 113, 113);
+}
+
+.prose-blog pre {
+  background-color: rgb(15, 23, 42);
+  color: rgb(226, 232, 240);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgb(30, 41, 59);
+}
+
+.dark .prose-blog pre {
+  background-color: rgb(15, 23, 42);
+}
+
+.prose-blog pre code {
+  background-color: transparent;
+  padding: 0;
+  color: rgb(226, 232, 240);
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.875rem;
+}
+
+.prose-blog img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.dark .prose-blog img {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.prose-blog figure {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.prose-blog figcaption {
+  text-align: center;
+  font-size: 0.875rem;
+  color: rgb(100, 116, 139);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.dark .prose-blog figcaption {
+  color: rgb(148, 163, 184);
+}
+
+.prose-blog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.prose-blog thead {
+  background-color: rgb(241, 245, 249);
+}
+
+.dark .prose-blog thead {
+  background-color: rgb(30, 41, 59);
+}
+
+.prose-blog th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: rgb(15, 23, 42);
+  border: 1px solid rgb(226, 232, 240);
+}
+
+.dark .prose-blog th {
+  color: rgb(248, 250, 252);
+  border-color: rgb(51, 65, 85);
+}
+
+.prose-blog td {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgb(226, 232, 240);
+  color: rgb(51, 65, 85);
+}
+
+.dark .prose-blog td {
+  border-color: rgb(51, 65, 85);
+  color: rgb(203, 213, 225);
+}
+
+.prose-blog tbody tr:hover {
+  background-color: rgb(248, 250, 252);
+}
+
+.dark .prose-blog tbody tr:hover {
+  background-color: rgba(15, 23, 42, 0.5);
+}
+
+.prose-blog hr {
+  border-top: 2px solid rgb(226, 232, 240);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dark .prose-blog hr {
+  border-top-color: rgb(51, 65, 85);
+}
